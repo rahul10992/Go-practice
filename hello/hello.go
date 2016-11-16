@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/cmplx"
 	"math/rand"
+	"runtime"
 )
 
 const Pi = 3.14
@@ -12,6 +13,7 @@ const Pi = 3.14
 func main() {
 	// hello world
 	fmt.Printf("Hello, world.\n")
+	fmt.Println("Differnet functions and things. Simple Stuff")
 
 	//Math
 	fmt.Println(math.Pi)
@@ -20,18 +22,18 @@ func main() {
 	s3 := rand.NewSource(192891384984)
 	r1 := rand.New(s3)
 	for i := 0; i < 20; i++ {
-
 		fmt.Print(r1.Intn(100), ",")
 	}
 	fmt.Print(r1.Intn(100))
 	fmt.Println()
+
 	// different function types
 	fmt.Println(add(98, 12))
 	fmt.Println(multiply(345, 100))
 	fmt.Println(swapMultipleReturns("Hello", "World"))
 	fmt.Println(splitNamedReturn(90))
 
-	//different variable info
+	//different variables and constants info
 	var c, python, java = "true", "false", 12
 	var j int
 	k := 54
@@ -49,6 +51,66 @@ func main() {
 	fmt.Println(needInt(Small))
 	fmt.Println(needFloat(Small))
 	fmt.Println(needFloat(Big))
+
+	// Go does not have a whie.
+	uy := 1
+	for uy < 10 { // a statement being executed before getting into the for
+		uy += uy
+		fmt.Println("uy = ", uy)
+	}
+	//OR
+	// sum := 1
+	// for sum < 1000 {
+	// 	sum += sum
+	// }
+	// fmt.Println(sum)
+
+	fmt.Println(
+		pow(3, 2, 10),
+		pow(3, 3, 20),
+	)
+
+	printOS()
+	fmt.Println()
+	deferSample()
+	consecutiveDefers()
+
+}
+
+func consecutiveDefers() {
+	fmt.Println("Counting") //consecutive defers end up everything in a stack and use LIFO to traverse through all the defers once the function returns
+
+	for i := 0; i <= 10; i++ {
+		defer fmt.Println(i)
+	}
+
+}
+
+func deferSample() {
+	defer fmt.Println("World") //defer defers the execution of a statement until its surrounding function returns
+	fmt.Println("Hello")
+}
+
+func printOS() {
+	fmt.Print("Go runs on ")
+	switch os := runtime.GOOS; os {
+	case "darwin":
+		fmt.Println("OS X.")
+	case "linux":
+		fmt.Println("Linux.")
+	default:
+		// freebsd, openbsd,
+		// plan9, windows...
+		fmt.Printf("%s.", os)
+	}
+
+}
+
+func pow(x, n, lim float64) float64 {
+	if v := math.Pow(x, n); v < lim { // a statement being executed before getting into the if
+		return v
+	}
+	return lim
 }
 
 const (
@@ -59,7 +121,10 @@ const (
 	Small = Big >> 99
 )
 
-func needInt(x int) int { return x*10 + 1 }
+func needInt(x int) int {
+	return x*10 + 1
+}
+
 func needFloat(x float64) float64 {
 	return x * 0.1
 }
