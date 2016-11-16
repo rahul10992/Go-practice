@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	fmt.Println("****Pointers****")
@@ -97,6 +100,48 @@ func main() {
 	if nilSlice == nil {
 		fmt.Println("nil!")
 	}
+	//slices can be made with the make() func. It allocates a zeroed array and returns a slice that refers to that array
+	slice6 := make([]int, 5)    //length of this slice is 5
+	slice7 := make([]int, 0, 5) //length of slice = 0 and capacity = 5
+	fmt.Println("slice6", slice6)
+	fmt.Println("slice7", slice7)
+	//slices can contain any type. Including other slices
+	board := [][]string{
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+	}
+	board[0][0] = "X"
+	board[2][2] = "O"
+	board[1][2] = "X"
+	board[1][0] = "O"
+	board[0][2] = "X"
+	for i := 0; i < len(board); i++ {
+		fmt.Printf("%s\n", strings.Join(board[i], " "))
+	}
+	// the append new elements to the slice
+	slice8 := make([]int, 0)
+	fmt.Println("slice8", slice8)
+	slice8 = append(slice8, 0)
+	fmt.Println("slice8", slice8)
+	slice8 = append(slice8, 1)
+	fmt.Println("slice8", slice8)
+	slice8 = append(slice8, 2, 3, 4, 5, 6)
+	fmt.Println("slice8", slice8)
+	//the 'range' form for loop iterates over a slice or map. Sort of like iterators
+	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+	for i, r := range pow {
+		fmt.Printf("%d = %d, ", i, r)
+	}
+	fmt.Println()
+	//other alternatives here
+	for i := range pow {
+		fmt.Printf("%d, ", pow[i])
+	}
+	for _, value := range pow {
+		fmt.Printf("%d\n", value)
+	}
+	fmt.Println()
 
 }
 
