@@ -2,7 +2,7 @@ package main
 
 import "golang.org/x/tour/pic"
 
-func Pic(dx, dy int) [][]uint8 { // is printing a bunch of characters. Looks more like a authentication bearer token than anything else.. need to know why.
+func printPic(dx, dy int) [][]uint8 { // is printing a bunch of characters. Look at it in a smaller window.
 	var result = make([][]uint8, dx)
 	for i := 0; i < dx; i++ {
 		var k uint8 = 1
@@ -31,5 +31,5 @@ func power(x, y int) int {
 }
 
 func main() {
-	pic.Show(Pic)
+	pic.Show(printPic)
 }
