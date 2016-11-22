@@ -34,7 +34,8 @@ func adder() func(int) int {
 }
 
 func functionClosureExample() {
-	pos, neg := adder(), adder()
+	pos := adder()
+	neg := adder()
 	for i := 0; i < 10; i++ {
 		fmt.Println(
 			pos(i),
@@ -43,7 +44,27 @@ func functionClosureExample() {
 	}
 }
 
+//fibonacci closure
+func fibonacci() func() int {
+	a := 0
+	b := 1
+	return func() int {
+		res := a
+		b = a + b
+		a = b - a
+		return res
+	}
+}
+func fibonacciClosureExercise() {
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
+
+}
+
 func main() {
 	//functionValuesExample()
-	functionClosureExample()
+	//functionClosureExample()
+	fibonacciClosureExercise()
 }
