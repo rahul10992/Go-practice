@@ -27,6 +27,12 @@ func (t T) M() {
 	fmt.Println(t.S)
 }
 
+type F float64
+
+func (f F) M() {
+	fmt.Println(f)
+}
+
 func main() {
 	var a Abser
 	f := MyFloat(-math.Sqrt2)
@@ -40,8 +46,8 @@ func main() {
 	// and does NOT implement Abser.
 	//a = v
 	a = &f
-
 	fmt.Println(a.Abs())
+
 }
 
 type MyFloat float64
