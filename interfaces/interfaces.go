@@ -21,6 +21,9 @@ type T struct {
 	S string
 }
 
+//empty Interface:
+type emptyInterface interface{}
+
 //M : This method means type T implements the interface I,
 // but we don't need to explicitly declare that it does so.
 func (t T) M() {
@@ -45,9 +48,33 @@ func main() {
 	// In the following line, v is a Vertex (not *Vertex)
 	// and does NOT implement Abser.
 	//a = v
+	//fmt.Println(a.Abs())
+	fmt.Println(a)
 	a = &f
 	fmt.Println(a.Abs())
+	fmt.Println("********")
+	// this part shows how interface values can be thought of as a tuple of a value and a concrete type
+	var i I
+	i = &T{"Hello"}
+	describe(i)
+	i.M()
 
+	i = F(math.Pi)
+	describe(i)
+	i.M()
+	//nil interfaces:
+	var interfaceObj I
+	describe(interfaceObj)
+	//interfaceObj.M()//the panic stuff you see when you uncomment this is what we call a runtime error
+
+	//check empty interface stuff now:
+	fmt.Println("****Ëmpty Interfaces:")
+	var emp interface{} // this is an empty interface as well
+	describeEmpty(emp)
+	emp = 42
+	describeEmpty(emp)
+	emp = "hello"
+	describeEmpty(emp)
 }
 
 type MyFloat float64
@@ -65,4 +92,12 @@ type Vertex struct {
 
 func (v *Vertex) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+
+func describeEmpty(i interface{}) {
+	fmt.Printf("(%v, %T)\n", i, i)
 }
