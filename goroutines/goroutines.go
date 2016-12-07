@@ -32,6 +32,13 @@ func main() {
 	x, y := <-c, <-c // receive from c
 
 	fmt.Println(x, y, x+y)
+
+	//channel buffering is possible. See:=
+	ch := make(chan int, 2) //second argument that does it. Fills up like a queue
+	ch <- 1
+	ch <- 2
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
 }
 
 //goroutines are lightweight threads managed at go runtime
