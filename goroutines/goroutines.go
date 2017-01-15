@@ -28,17 +28,24 @@ func main() {
 
 	c := make(chan int)
 	go sum(s[:len(s)/2], c)
+	//fmt.Println(s[:len(s)/2])
+
 	go sum(s[len(s)/2:], c)
-	x, y := <-c, <-c // receive from c
+	//fmt.Println(s[len(s)/2:])
+
+	x := <-c // channels seem to be queues
+	y := <-c // receive from c
 
 	fmt.Println(x, y, x+y)
 
 	//channel buffering is possible. See:=
-	ch := make(chan int, 2) //second argument that does it. Fills up like a queue
+	ch := make(chan int, 2) //second argument that does it. Fills up like a queue [yeah.. like I said earlier..]
 	ch <- 1
 	ch <- 2
+	ch <- 3
 	fmt.Println(<-ch)
 	fmt.Println(<-ch)
+	fmt.Println(<-ch) //overloading the buffer size of this channel. Just to watch the world burn
 }
 
 //goroutines are lightweight threads managed at go runtime

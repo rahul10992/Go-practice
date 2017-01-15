@@ -43,7 +43,7 @@ func main() {
 	for i := range c {
 		fmt.Println(i)
 	}
-	fmt.Println("select statement")
+	fmt.Println("--select statement--")
 	ch := make(chan int)
 	quit := make(chan int)
 	go func() {
