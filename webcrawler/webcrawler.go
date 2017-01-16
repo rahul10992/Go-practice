@@ -40,7 +40,7 @@ func Crawl(url string, depth int, fetcher Fetcher, ret chan string) {
 		}
 	}
 
-	for it := 0; it < len(set); it++ { //verify no dups
+	for it := 0; it < len(set); it++ { //verify no duplicates
 		ret <- set[it]
 	}
 
