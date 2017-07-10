@@ -3,5 +3,3 @@ Simply Learning go and git. Just simple stuff from the first leg of the tutorial
 
 Seriously, its from the tour of go stuff as of now. Will update this doc as I add new stuff to this repo.
 But, you probably won't get anything worthwhile tbh.. Not right now.
-
-Yay! the go tour is complete. Now, I need to figure out what to do with my life.. 
